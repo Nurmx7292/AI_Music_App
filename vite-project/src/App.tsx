@@ -5,11 +5,12 @@ import { Trending } from './pages/Trending'
 import { Player } from './pages/Player'
 import { Feed } from './pages/Feed'
 import { Library } from './pages/Library'
-
+import Sidebar from './components/sidebar/Sidebar'
 function App() {
 
   return (
-    <>
+    <div className='main-body'>
+      <Sidebar/>
       <Routes>
         <Route path='/' element={<Library/>}/>
         <Route path='/favorite' element={<Favorite/>}/>
@@ -17,7 +18,7 @@ function App() {
         <Route path='/player' element={<Player/>}/>
         <Route path='/rending' element={<Trending/>}/>
       </Routes>
-    </>
+    </div>
   )
 }
 
