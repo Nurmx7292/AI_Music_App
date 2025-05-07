@@ -6,28 +6,85 @@ a {
     height: 80px;
     width: 80px;
     border-radius: 20px;
-    color: #F8D9C0;
+    color: var(--vk-text-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     margin: 5px auto;
     transition: all 0.2s ease;
-    background-color: rgba(244, 187, 146,0.0);
+    background-color: transparent;
+}
+
+.btn-body.active, .btn-body:hover {
+    background-color: var(--primary);
+    color: var(--text-main);
+    box-shadow: 0 0 0 2px var(--primary), 0 2px 12px 0 rgba(91,127,255,0.15);
+    border: 2px solid var(--primary);
 }
 
 .btn-body.active{
-    background-color: rgb(252, 162, 97);
-    color: #fff;
+    background-color: var(--vk-accent);
+    color: var(--vk-text-primary);
     transform: scale(1.05);
 }
 
 .btn-body:hover{
-    color: #fff;
+    color: var(--vk-text-primary);
+    background-color: var(--vk-background-tertiary);
 }
 
 .btn-title{
     margin: 4px auto;
     font-weight: 600;
     font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .btn-body {
+        width: 100%;
+        height: 54px;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0 16px;
+        margin: 0;
+        border-radius: 12px;
+        background-color: var(--vk-background-tertiary);
+    }
+
+    .btn-title {
+        margin: 0 0 0 12px;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--vk-text-secondary);
+    }
+
+    .btn-body:hover {
+        background-color: var(--vk-background-tertiary);
+        transform: translateX(4px);
+    }
+
+    .btn-body.active {
+        background-color: var(--vk-accent);
+        border-left: 3px solid var(--vk-accent);
+        transform: none;
+    }
+
+    .btn-body.active .btn-title {
+        color: var(--vk-text-primary);
+    }
+
+    .sidebar-footer .btn-body {
+        background-color: var(--vk-error);
+        border: 1px solid var(--vk-error);
+    }
+
+    .sidebar-footer .btn-body:hover {
+        background-color: var(--vk-error);
+        opacity: 0.9;
+    }
+
+    .sidebar-footer .btn-title {
+        color: var(--vk-text-primary);
+    }
 }
