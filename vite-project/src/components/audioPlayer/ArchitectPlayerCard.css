@@ -1,0 +1,177 @@
+.architect-player-card {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  background: linear-gradient(120deg, #27354d 80%, #3e61d2 100%);
+  border-radius: 32px;
+  box-shadow: 0 8px 32px rgba(30,42,62,0.18);
+  padding: 36px 32px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: visible;
+}
+
+.apc-art-perspective {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 18px;
+  perspective: 600px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.apc-art-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px 0 rgba(30,42,62,0.25);
+  transform: skewY(-7deg) rotateZ(-2deg);
+  object-fit: cover;
+  z-index: 2;
+}
+
+.apc-art-shadow {
+  position: absolute;
+  bottom: 8px;
+  left: 18px;
+  width: 80%;
+  height: 18px;
+  background: rgba(30,42,62,0.18);
+  filter: blur(6px);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.apc-art-lines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.apc-art-lines::before, .apc-art-lines::after {
+  content: '';
+  position: absolute;
+  border-radius: 2px;
+  background: rgba(196,208,227,0.18);
+}
+.apc-art-lines::before {
+  left: 10px; top: 20px; width: 80%; height: 2px;
+}
+.apc-art-lines::after {
+  left: 20px; top: 40px; width: 60%; height: 2px;
+}
+
+.apc-info {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.apc-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #c4d0e3;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.apc-artist {
+  font-size: 1rem;
+  color: #9aa9c2;
+  letter-spacing: 0.03em;
+}
+
+.apc-progress-wall {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 24px 0 8px 0;
+  height: 22px;
+  gap: 2px;
+}
+.apc-wall-block {
+  flex: 1 1 0;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px 2px 0 0;
+  transition: background 0.3s, height 0.3s, box-shadow 0.3s;
+}
+.apc-wall-block.filled {
+  background: linear-gradient(90deg, #c4d0e3 60%, #3e61d2 100%);
+  height: 10px;
+  box-shadow: 0 2px 8px 0 rgba(30,42,62,0.12);
+}
+
+.apc-time-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #c4d0e3;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+
+.apc-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin-top: 8px;
+}
+.apc-ctrl-btn {
+  background: none;
+  border: none;
+  color: #c4d0e3;
+  font-size: 1.6rem;
+  border-radius: 50%;
+  padding: 10px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.apc-ctrl-btn:hover {
+  background: rgba(62,97,210,0.12);
+  color: #3e61d2;
+  transform: scale(1.12);
+}
+.apc-play-btn {
+  background: linear-gradient(120deg, #3e61d2 60%, #c4d0e3 100%);
+  color: #27354d;
+  font-size: 2.1rem;
+  box-shadow: 0 2px 12px 0 rgba(30,42,62,0.18);
+}
+.apc-play-btn:hover {
+  background: linear-gradient(120deg, #c4d0e3 60%, #3e61d2 100%);
+  color: #3e61d2;
+}
+
+.apc-play-btn svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.apc-play-btn .fa-play {
+  position: relative;
+  left: -2px;
+}
+
+.apc-play-btn .fa-pause {
+  position: relative;
+  left: 0;
+}
+
+.apc-play-btn-center svg {
+  display: block;
+  margin: 0 auto;
+}
+.apc-play-btn-center .fa-play {
+  position: relative;
+  left: -2px;
+}
+.apc-play-btn-center .fa-pause {
+  position: relative;
+  left: 0;
+} 

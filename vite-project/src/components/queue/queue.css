@@ -1,0 +1,76 @@
+.queue-container {
+  width: 100%;
+  height: 35%;
+  border-radius: 30px;
+  border-top-right-radius: 0px;
+  background-color: var(--surface-bright);
+  box-shadow: 0 4px 32px 0 rgba(60,80,180,0.10);
+  border: 1.5px solid var(--border);
+  opacity: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.queue {
+  height: 85%;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.upNext {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--vk-text-primary);
+  text-align: left;
+  margin: 10px 0px;
+}
+
+.queue-list {
+  max-height: 150px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.queue-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.queue-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.queue-list::-webkit-scrollbar-thumb {
+  background: var(--vk-border);
+  border-radius: 10px;
+}
+
+.queue-item {
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 0px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vk-text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.queue-item:hover {
+  transform: scale(0.95);
+  color: var(--vk-accent);
+}
+
+.queue-item p {
+  margin: 0px;
+}
+
+.track-name {
+  width: 75%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
