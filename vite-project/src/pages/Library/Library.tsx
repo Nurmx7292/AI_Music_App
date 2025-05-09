@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import APIKit from "../../utils/spotifyAPI/spotify";
 import { IconContext } from "react-icons";
-import { AiFillPlayCircle } from "react-icons/ai";
+import { FaPlay } from "react-icons/fa";
 import "./library.css";
 import { useNavigate } from "react-router-dom";
 
@@ -37,9 +37,11 @@ export const Library = () => {
             <p className="playlist-title">{playlist.name}</p>
             <p className="playlist-subtitle">{playlist.tracks.total} Songs</p>
             <div className="playlist-fade">
-              <IconContext.Provider value={{ size: "50px", color: "#E99D72" }}>
-                <AiFillPlayCircle />
-              </IconContext.Provider>
+              <button className="playlist-start-btn" onClick={e => {e.stopPropagation(); playPlaylist(playlist.id);}}>
+                <IconContext.Provider value={{ size: "20px", color: "var(--text-main)" }}>
+                  <FaPlay />
+                </IconContext.Provider>
+              </button>
             </div>
           </div>
         ))}
