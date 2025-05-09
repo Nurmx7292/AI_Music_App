@@ -11,7 +11,8 @@ const scopes = [
   "user-library-read",
   "playlist-read-private",
   "user-read-playback-state", 
-  "user-modify-playback-state" 
+  "user-modify-playback-state",
+  "user-follow-read"
 ];
 
 export const generatePKCE = async () => {
@@ -84,6 +85,28 @@ export const setClientToken = (token: string) => {
     config.headers.Authorization = "Bearer " + token;
     return config;
   });
+};
+
+const backendClient = axios.create({
+  baseURL: "http://localhost:3001/api/",
+});
+
+export const getPreviewUrl = async (songName: string) => {
+  try {
+    const response = await backendClient.get(`preview/${encodeURIComponent(songName)}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting preview URL:', error);
+    throw error;
+  }
+};
+
+export const logout = () => {
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('refresh_token');
+  localStorage.removeItem('spotify_code_verifier');
+  localStorage.removeItem('code_challenge');
+  window.location.href = '/';
 };
 
 export default apiClient;
