@@ -4,11 +4,63 @@
   margin: 0;
 }
 
+
+
 .main-body{
-  height: 100vh;
+  gap: 5%;
+  min-height: 100vh;
+  height: 100%;
   width: 100vw;
-  background-color: #9d76ff;
-  border-radius: 30px;
+  background: var(--main-bg);
+  /* border-radius: 30px; */
   display: flex;
   flex-direction: column;
 }
+
+.burger-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .main-body {
+    border-radius: 0;
+    padding-top: 80px; /* Reduced padding for better spacing */
+  }
+
+  .burger-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    color: white;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+  }
+
+  .burger-menu:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .burger-menu .material-icons {
+    font-size: 24px;
+  }
+
+  /* When menu is open */
+  .burger-menu.open {
+    background: rgba(255, 72, 66, 0.1);
+    color: rgba(255, 72, 66, 0.9);
+  }
+
+  .burger-menu.open:hover {
+    background: rgba(255, 72, 66, 0.15);
+  }
+}
+

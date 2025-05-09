@@ -1,5 +1,5 @@
 .login-page {
-  background-color: #1f1f1f;
+  background-color: var(--vk-background);
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -17,11 +17,17 @@
   width: 200px;
   padding: 15px 0px;
   text-align: center;
-  background-color: #fefefe;
+  background-color: var(--vk-accent);
   border-radius: 50px;
-  color: #1f1f1f;
+  color: var(--vk-text-primary);
   font-weight: 600;
   margin-top: 20%;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  background-color: var(--vk-accent-hover);
+  transform: scale(1.05);
 }
 
 a {
