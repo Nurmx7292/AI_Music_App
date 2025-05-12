@@ -10,8 +10,8 @@ import { log } from "console";
 
 export const Player = () => {
   const location = useLocation();
-  const [tracks, setTracks] = useState([]);
-  const [currentTrack, setCurrentTrack] = useState({});
+  const [tracks, setTracks] = useState<any[]>([]);
+  const [currentTrack, setCurrentTrack] = useState<any>({});
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -20,15 +20,18 @@ export const Player = () => {
       apiClient
         .get("playlists/" + location.state?.id + "/tracks")
         .then((res) => {
-          console.log(res)
-          setTracks(res.data.items);
-          setCurrentTrack(res.data?.items[0]?.track);
+          const items = res.data.items.map((item: any) => ({
+            ...item.track,
+            uri: item.track.uri
+          }));
+          setTracks(items);
+          setCurrentTrack(items[0]);
         });
     }
   }, [location.state]);
 
   useEffect(() => {
-    setCurrentTrack(tracks[currentIndex]?.track);
+    setCurrentTrack(tracks[currentIndex]);
   }, [currentIndex, tracks]);
 
   return (

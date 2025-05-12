@@ -12,7 +12,10 @@ const scopes = [
   "playlist-read-private",
   "user-read-playback-state", 
   "user-modify-playback-state",
-  "user-follow-read"
+  "user-follow-read",
+  "streaming",
+  "user-read-email",
+  "user-read-private"
 ];
 
 export const generatePKCE = async () => {
@@ -110,3 +113,180 @@ export const logout = () => {
 };
 
 export default apiClient;
+
+// Web Playback SDK
+let player: Spotify.Player | null = null;
+let deviceId: string | null = null;
+
+declare global {
+  interface Window {
+    onSpotifyWebPlaybackSDKReady: () => void;
+    Spotify: {
+      Player: new (config: {
+        name: string;
+        getOAuthToken: (cb: (token: string) => void) => void;
+        volume?: number;
+      }) => Spotify.Player;
+    };
+  }
+}
+
+export const initializePlayer = async (token: string): Promise<void> => {
+  if (player) return;
+
+  // Wait for the SDK to be ready
+  if (!window.Spotify) {
+    await new Promise<void>((resolve) => {
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        resolve();
+      };
+    });
+  }
+
+  try {
+    player = new window.Spotify.Player({
+      name: 'Web Playback SDK',
+      getOAuthToken: cb => { cb(token); },
+      volume: 0.5
+    });
+
+    // Error handling
+    player.addListener('initialization_error', ({ message }) => {
+      console.error('Failed to initialize:', message);
+    });
+
+    player.addListener('authentication_error', ({ message }) => {
+      console.error('Failed to authenticate:', message);
+    });
+
+    player.addListener('account_error', ({ message }) => {
+      console.error('Failed to validate Spotify account:', message);
+    });
+
+    player.addListener('playback_error', ({ message }) => {
+      console.error('Failed to perform playback:', message);
+    });
+
+    // Playback status updates
+    player.addListener('player_state_changed', state => {
+      console.log('Player state changed:', state);
+    });
+
+    // Ready
+    player.addListener('ready', ({ device_id }) => {
+      console.log('Ready with Device ID', device_id);
+      deviceId = device_id;
+    });
+
+    // Not Ready
+    player.addListener('not_ready', ({ device_id }) => {
+      console.log('Device ID has gone offline', device_id);
+    });
+
+    // Connect to the player!
+    const connected = await player.connect();
+    if (connected) {
+      console.log('The Web Playback SDK successfully connected to Spotify!');
+    }
+  } catch (error) {
+    console.error('Error initializing Spotify player:', error);
+    throw error;
+  }
+};
+
+export const playTrack = async (trackUri: string): Promise<void> => {
+  if (!player || !deviceId) {
+    console.error('Player not initialized or device ID not available');
+    return;
+  }
+
+  try {
+    // First, transfer playback to our device
+    await apiClient.put('me/player', {
+      device_ids: [deviceId],
+      play: false
+    });
+
+    // Then start playback
+    await apiClient.put('me/player/play', {
+      uris: [trackUri]
+    });
+  } catch (error) {
+    console.error('Error playing track:', error);
+    throw error;
+  }
+};
+
+export const pauseTrack = async (): Promise<void> => {
+  if (!player) {
+    console.error('Player not initialized');
+    return;
+  }
+
+  try {
+    await player.pause();
+  } catch (error) {
+    console.error('Error pausing track:', error);
+  }
+};
+
+export const resumeTrack = async (): Promise<void> => {
+  if (!player) {
+    console.error('Player not initialized');
+    return;
+  }
+
+  try {
+    await player.resume();
+  } catch (error) {
+    console.error('Error resuming track:', error);
+  }
+};
+
+export const getCurrentState = async (): Promise<Spotify.PlaybackState | null> => {
+  if (!player) {
+    console.error('Player not initialized');
+    return null;
+  }
+
+  try {
+    return await player.getCurrentState();
+  } catch (error) {
+    console.error('Error getting current state:', error);
+    return null;
+  }
+};
+
+export const seek = async (position_ms: number): Promise<void> => {
+  if (!player) {
+    console.error('Player not initialized');
+    return;
+  }
+
+  try {
+    await player.seek(position_ms);
+  } catch (error) {
+    console.error('Error seeking:', error);
+  }
+};
+
+export const setVolume = async (volume: number): Promise<void> => {
+  if (!player) {
+    console.error('Player not initialized');
+    return;
+  }
+
+  try {
+    await player.setVolume(volume);
+  } catch (error) {
+    console.error('Error setting volume:', error);
+  }
+};
+
+export const disconnectPlayer = async (): Promise<void> => {
+  if (player) {
+    await player.disconnect();
+    player = null;
+    deviceId = null;
+  }
+};

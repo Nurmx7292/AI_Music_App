@@ -4,43 +4,31 @@ import WidgetEntry from "./widgetEntry";
 import { IconContext } from "react-icons";
 import { FiChevronRight } from "react-icons/fi";
 
-export default function WidgetCard({ title, similar, featured, newRelease }) {
-  console.log(
-    "similar",
-    similar,
-    "featured",
-    featured,
-    "newRelease",
-    newRelease
-  );
+interface WidgetCardProps {
+  title: string;
+  similar?: any[];
+  featured?: any[];
+  newRelease?: any[];
+}
+
+export default function WidgetCard({ title, similar, featured, newRelease }: WidgetCardProps) {
+  const items = similar || featured || newRelease || [];
+  
   return (
     <div className="widgetcard-body">
       <p className="widget-title">{title}</p>
-      {similar
-        ? similar.map((artist) => (
-            <WidgetEntry
-              title={artist?.name}
-              subtitle={artist?.followers?.total + " Followers"}
-              image={artist?.images[2]?.url}
+      <div className="widget-content">
+        {items.map((item, index) => (
+          <div key={`${item.id}-${index}`} className="widget-item">
+            <img
+              src={item.images?.[0]?.url || null}
+              alt={item.name}
+              className="widget-image"
             />
-          ))
-        : featured
-        ? featured.map((playlist) => (
-            <WidgetEntry
-              title={playlist?.name}
-              subtitle={playlist?.tracks?.total + " Songs"}
-              image={playlist?.images[0]?.url}
-            />
-          ))
-        : newRelease
-        ? newRelease.map((album) => (
-            <WidgetEntry
-              title={album?.name}
-              subtitle={album?.artists[0]?.name}
-              image={album?.images[2]?.url}
-            />
-          ))
-        : null}
+            <p className="widget-name">{item.name}</p>
+          </div>
+        ))}
+      </div>
       <div className="widget-fade">
         <div className="fade-button">
           <IconContext.Provider value={{ size: "24px", color: "#c4d0e3" }}>
