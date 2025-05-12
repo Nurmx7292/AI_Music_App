@@ -52,7 +52,28 @@
 
 .queue-list {
   width: 100%;
+  max-height: 320px;
   overflow-y: auto;
+  scrollbar-width: thin;
+  padding-right: 6px;
+}
+
+.queue-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.queue-list::-webkit-scrollbar-track {
+  background: var(--vk-background-primary);
+  border-radius: 4px;
+}
+
+.queue-list::-webkit-scrollbar-thumb {
+  background: var(--vk-accent, #1DB954);
+  border-radius: 6px;
+}
+
+.queue-list::-webkit-scrollbar-thumb:hover {
+  background: var(--vk-accent-hover);
 }
 
 .queue-item {
@@ -90,4 +111,10 @@
   text-overflow: ellipsis;
   text-align: right;
   padding-left: 10px;
+}
+
+@media (max-width: 900px) {
+  .queue-list {
+    max-height: 180px;
+  }
 }

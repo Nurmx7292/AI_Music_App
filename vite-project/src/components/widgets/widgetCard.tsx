@@ -29,13 +29,7 @@ export default function WidgetCard({ title, similar, featured, newRelease }: Wid
           </div>
         ))}
       </div>
-      <div className="widget-fade">
-        <div className="fade-button">
-          <IconContext.Provider value={{ size: "24px", color: "#c4d0e3" }}>
-            <FiChevronRight />
-          </IconContext.Provider>
-        </div>
-      </div>
+      <div className="widget-fade"></div>
     </div>
   );
 }

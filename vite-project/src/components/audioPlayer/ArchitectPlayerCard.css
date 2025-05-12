@@ -1,16 +1,19 @@
 .architect-player-card {
   width: 100%;
+  min-width: 320px;
   max-width: 420px;
+  min-height: 340px;
   margin: 0 auto;
   background: linear-gradient(120deg, #27354d 80%, #3e61d2 100%);
-  border-radius: 32px;
+  border-radius: 24px;
   box-shadow: 0 8px 32px rgba(30,42,62,0.18);
-  padding: 36px 32px 28px 32px;
+  padding: 32px 24px 28px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   overflow: visible;
+  flex-grow: 1;
 }
 
 .apc-art-perspective {
@@ -193,4 +196,13 @@
 .apc-play-btn-center .fa-pause {
   position: relative;
   left: 0;
+}
+
+@media (max-width: 900px) {
+  .architect-player-card {
+    min-width: 220px;
+    max-width: 98vw;
+    min-height: 220px;
+    padding: 16px 8px;
+  }
 } 

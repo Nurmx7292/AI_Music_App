@@ -1,26 +1,45 @@
 .trending-container {
-  padding: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
-  min-height: 100vh;
+  min-height: 85vh;
+  width: 100%;
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--vk-background-primary, #23243a);
+}
+
+.trending-inner {
+  width: 96%;
+  max-width: 800px;
+  background: var(--vk-background-secondary, #23243a);
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 28px 16px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh;
 }
 
 .trending-header {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .trending-header h1 {
-  font-size: 2.5rem;
-  color: #1DB954;
-  margin-bottom: 24px;
-  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--vk-accent, #1DB954);
+  margin-bottom: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 
 .search-container {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 500px;
+  margin: 0 auto 20px;
   position: relative;
+  flex-shrink: 0;
 }
 
 .search-bar {
@@ -32,18 +51,18 @@
 .search-input {
   width: 100%;
   padding: 16px 48px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--vk-background-secondary, #23243a);
   border: 2px solid transparent;
-  border-radius: 30px;
-  color: #fff;
+  border-radius: 16px;
+  color: var(--vk-text-primary, #fff);
   font-size: 1.1rem;
   transition: all 0.3s ease;
 }
 
 .search-input:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #1DB954;
+  background: var(--vk-background-primary, #23243a);
+  border-color: var(--vk-accent, #1DB954);
   box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.1);
 }
 
@@ -56,7 +75,7 @@
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #1DB954;
+  color: var(--vk-accent, #1DB954);
   font-size: 24px;
 }
 
@@ -123,66 +142,82 @@
 }
 
 .tracks-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 20px;
-  padding: 20px 0;
+  width: 80%;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  max-height: 65vh;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tracks-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.tracks-container::-webkit-scrollbar-thumb {
+  background: var(--vk-accent, #1DB954);
+  border-radius: 6px;
 }
 
 .track-card {
   display: flex;
   align-items: center;
-  padding: 16px;
-  background: #282828;
-  border-radius: 12px;
-  transition: all 0.2s ease;
-  max-width: 100%;
-  overflow: hidden;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+  min-height: 64px;
+  max-width: 99%;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid rgba(255,255,255,0.04);
 }
 
 .track-card:hover {
-  background: #333333;
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 8px 24px rgba(29,185,84,0.10);
+  background: rgba(40, 58, 88, 0.18);
+  border-color: var(--vk-accent, #1DB954);
 }
 
 .track-image {
-  width: 64px;
-  height: 64px;
-  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
   object-fit: cover;
   margin-right: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 
 .track-info {
   flex: 1;
   min-width: 0;
-  margin-right: 16px;
-  overflow: hidden;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .track-name {
+  font-size: 1.13rem;
+  font-weight: 700;
+  color: var(--vk-text-primary, #fff);
+  margin: 0 0 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
+
+.track-artist, .track-album {
   font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  margin: 0 0 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.track-artist {
-  font-size: 0.9rem;
-  color: #a7a7a7;
-  margin: 0 0 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.track-album {
-  font-size: 0.85rem;
-  color: #a7a7a7;
-  margin: 0;
+  color: var(--vk-text-secondary, #b3b3b3);
+  margin: 0 0 2px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -191,9 +226,8 @@
 .track-controls {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   margin-left: auto;
-  position: relative;
 }
 
 .track-progress {
@@ -222,34 +256,29 @@
 }
 
 .play-button {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: none;
-  background: #1DB954;
-  color: #fff;
+  background: var(--vk-accent, #1DB954);
+  color: var(--vk-text-primary, #fff);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s;
   padding: 0;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 1;
+  box-shadow: 0 2px 8px rgba(29, 185, 84, 0.13);
 }
 
 .play-button:hover {
-  transform: scale(1.05);
-  background: #1ed760;
+  transform: scale(1.08);
+  background: var(--vk-accent-hover, #1ed760);
+  box-shadow: 0 6px 16px rgba(29, 185, 84, 0.18);
 }
 
 .play-button.playing {
-  background: #169c46;
-}
-
-.play-button.playing:hover {
-  background: #1db954;
+  background: var(--vk-accent-active, #169c46);
 }
 
 .play-button .material-icons {
@@ -277,9 +306,9 @@
 }
 
 .track-duration {
-  color: #a7a7a7;
-  font-size: 0.85rem;
-  min-width: 45px;
+  color: var(--vk-text-secondary, #b3b3b3);
+  font-size: 0.98rem;
+  min-width: 40px;
   text-align: right;
 }
 
@@ -308,38 +337,39 @@
   font-size: 1rem;
 }
 
-@media (max-width: 768px) {
-  .trending-container {
-    padding: 16px;
+@media (max-width: 900px) {
+  .trending-inner {
+    padding: 10px 2px 8px 2px;
+    border-radius: 12px;
+    max-width: 99vw;
   }
-
   .tracks-container {
-    grid-template-columns: 1fr;
+    max-height: 38vh;
+    gap: 8px;
   }
-
+  .track-card {
+    padding: 7px 4px;
+    border-radius: 8px;
+    min-height: 48px;
+  }
   .track-image {
-    width: 48px;
-    height: 48px;
-  }
-
-  .track-name {
-    font-size: 0.95rem;
-  }
-
-  .track-artist {
-    font-size: 0.85rem;
-  }
-
-  .track-album {
-    font-size: 0.8rem;
-  }
-
-  .play-button {
     width: 36px;
     height: 36px;
+    border-radius: 6px;
+    margin-right: 7px;
   }
-
-  .play-button .material-icons {
-    font-size: 20px;
+  .track-name {
+    font-size: 0.98rem;
+  }
+  .track-artist, .track-album {
+    font-size: 0.85rem;
+  }
+  .play-button {
+    width: 28px;
+    height: 28px;
+  }
+  .track-duration {
+    font-size: 0.85rem;
+    min-width: 30px;
   }
 } 
