@@ -17,6 +17,7 @@ export const Library = () => {
   const navigate = useNavigate();
 
   const playPlaylist = (id:any) => {
+    localStorage.setItem('last_playlist_id', id);
     navigate("/player", { state: { id: id } });
   };
 

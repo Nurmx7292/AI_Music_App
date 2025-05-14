@@ -38,6 +38,7 @@
   transition: 0.5s ease-in-out;
   animation: none;
   pointer-events: none;
+  z-index: 1;
 }
 
 .widgetcard-body:hover .widget-fade {
@@ -52,6 +53,8 @@
   height: 100%;
   padding-right: 12px;
   scrollbar-width: thin;
+  position: relative;
+  z-index: 2;
 }
 .widget-content::-webkit-scrollbar {
   width: 8px;
@@ -72,6 +75,8 @@
   align-items: center;
   gap: 16px;
   padding: 10px;
+  position: relative;
+  z-index: 2;
 }
 .widget-item:hover {
   transform: scale(1.03);

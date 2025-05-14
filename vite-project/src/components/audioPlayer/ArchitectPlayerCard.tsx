@@ -15,10 +15,14 @@ interface ArchitectPlayerCardProps {
       images: Array<{ url: string }>;
       artists: Array<{ name: string }>;
     };
+    preview_url?: string;
   };
   progress: number;
   duration: number;
   onSeek: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isPreview?: boolean;
+  volume: number;
+  onVolumeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const BLOCKS = 24;
@@ -32,7 +36,10 @@ export default function ArchitectPlayerCard({
   track,
   progress,
   duration,
-  onSeek
+  onSeek,
+  isPreview,
+  volume,
+  onVolumeChange
 }: ArchitectPlayerCardProps) {
   // Архитектурный прогресс-бар (стена)
   const filledBlocks = Math.round((percentage / 100) * BLOCKS);
@@ -71,17 +78,45 @@ export default function ArchitectPlayerCard({
         ))}
       </div>
       <div className="apc-progress">
-        <input
-          type="range"
-          min="0"
-          max={duration}
-          value={progress}
-          onChange={onSeek}
-          className="apc-progress-bar"
-        />
+        {/* Прогресс трека */}
+        {duration > 0 ? (
+          <input
+            type="range"
+            min="0"
+            max={duration}
+            value={progress}
+            onChange={onSeek}
+            className="apc-progress-bar"
+            disabled={isPreview}
+            style={isPreview ? { opacity: 0.5, cursor: 'not-allowed' } : {}}
+          />
+        ) : (
+          <div style={{ color: '#b3b3b3', fontSize: '0.85rem', marginTop: 4, textAlign: 'center' }}>
+            Нет данных для перемотки
+          </div>
+        )}
+        {isPreview && duration > 0 && (
+          <div style={{ color: '#b3b3b3', fontSize: '0.85rem', marginTop: 4, textAlign: 'center' }}>
+            Перемотка недоступна для превью
+          </div>
+        )}
         <div className="apc-time">
           <span>{formatTime(progress)}</span>
           <span>{formatTime(duration)}</span>
+        </div>
+        {/* Громкость */}
+        <div style={{display: 'flex', alignItems: 'center', gap: 8, marginTop: 12}}>
+          <span style={{fontSize: '1.1em', color: '#b3b3b3'}}>🔊</span>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={onVolumeChange}
+            className="apc-progress-bar"
+            style={{width: 90}}
+          />
         </div>
       </div>
       <div className="apc-controls">

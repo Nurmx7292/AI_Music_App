@@ -15,18 +15,68 @@ export const Player = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    console.log(location.state)
-    if (location.state) {
-      apiClient
-        .get("playlists/" + location.state?.id + "/tracks")
-        .then((res) => {
-          const items = res.data.items.map((item: any) => ({
-            ...item.track,
-            uri: item.track.uri
-          }));
-          setTracks(items);
-          setCurrentTrack(items[0]);
-        });
+    let playlistId = location.state?.id;
+    let playlistType = location.state?.type;
+    if (!playlistId) {
+      playlistId = localStorage.getItem('last_playlist_id');
+      playlistType = localStorage.getItem('last_playlist_type');
+    }
+
+    const fetchAndSetRandomPlaylist = async () => {
+      try {
+        const res = await apiClient.get("me/playlists");
+        const playlists = res.data.items;
+        if (playlists.length > 0) {
+          const random = playlists[Math.floor(Math.random() * playlists.length)];
+          playlistId = random.id;
+          playlistType = undefined;
+          localStorage.setItem('last_playlist_id', playlistId);
+          localStorage.removeItem('last_playlist_type');
+          await fetchTracks(playlistId, playlistType);
+        }
+      } catch (e) {
+        // fallback: можно попробовать featured playlists или new releases
+        const featuredRes = await apiClient.get('browse/featured-playlists');
+        const featured = featuredRes.data.playlists.items;
+        if (featured.length > 0) {
+          const random = featured[Math.floor(Math.random() * featured.length)];
+          playlistId = random.id;
+          playlistType = undefined;
+          localStorage.setItem('last_playlist_id', playlistId);
+          localStorage.removeItem('last_playlist_type');
+          await fetchTracks(playlistId, playlistType);
+        }
+      }
+    };
+
+    const fetchTracks = async (id: string, type?: string) => {
+      let res;
+      if (type === 'album') {
+        res = await apiClient.get("albums/" + id + "/tracks");
+        const albumRes = await apiClient.get("albums/" + id);
+        const albumData = albumRes.data;
+        const items = res.data.items.map((item: any) => ({
+          ...item,
+          uri: item.uri,
+          album: albumData
+        }));
+        setTracks(items);
+        setCurrentTrack(items[0]);
+      } else {
+        res = await apiClient.get("playlists/" + id + "/tracks");
+        const items = res.data.items.map((item: any) => ({
+          ...item.track,
+          uri: item.track.uri
+        }));
+        setTracks(items);
+        setCurrentTrack(items[0]);
+      }
+    };
+
+    if (playlistId) {
+      fetchTracks(playlistId, playlistType);
+    } else {
+      fetchAndSetRandomPlaylist();
     }
   }, [location.state]);
 
