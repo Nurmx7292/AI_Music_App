@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import spotifyApi, { setClientToken, playTrack, pauseTrack, resumeTrack } from '../../utils/spotifyAPI/spotify';
-import './Trending.css';
+import './Explore.css';
 
 interface Track {
   id: string;
@@ -14,7 +14,7 @@ interface Track {
   duration_ms: number;
 }
 
-export const Trending = () => {
+export const Explore = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,67 +29,12 @@ export const Trending = () => {
       setClientToken(token);
     } else {
       setError('Please log in to access Spotify features');
-      return;
     }
-    
-    fetchTrendingTracks();
   }, []);
-
-  const fetchTrendingTracks = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const newReleasesResponse = await spotifyApi.get('browse/new-releases', {
-        params: {
-          limit: 20,
-          country: 'US'
-        }
-      });
-      
-      if (!newReleasesResponse.data.albums?.items?.length) {
-        setTracks([]);
-        setError('No tracks found.');
-        return;
-      }
-
-      const newTracks = await Promise.all(
-        newReleasesResponse.data.albums.items.map(async (album: any) => {
-          const trackResponse = await spotifyApi.get(`albums/${album.id}/tracks`, {
-            params: { limit: 1 }
-          });
-          
-          const track = trackResponse.data.items[0];
-          return {
-            id: track.id,
-            uri: track.uri,
-            name: track.name,
-            artists: track.artists,
-            album: {
-              name: album.name,
-              images: album.images
-            },
-            duration_ms: track.duration_ms
-          };
-        })
-      );
-
-      setTracks(newTracks);
-    } catch (err: any) {
-      console.error('Error fetching trending tracks:', err);
-      if (err.response?.status === 401) {
-        setError('Your session has expired. Please log in again.');
-      } else {
-        setError('Failed to load trending tracks. Please try again.');
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const searchTracks = useCallback(async (query: string) => {
     if (!query.trim()) {
-      fetchTrendingTracks();
+      setTracks([]);
       return;
     }
 
@@ -174,7 +119,7 @@ export const Trending = () => {
   };
 
   return (
-    <div className="trending-container">
+    <div className="explore-container">
       <div className="search-container">
         <input
           type="text"
@@ -203,7 +148,7 @@ export const Trending = () => {
         {!loading && tracks.length === 0 && !error && (
           <div className="no-results">
             <span className="material-icons">music_off</span>
-            <p>No tracks found. Try a different search.</p>
+            <p>Search for tracks to get started</p>
           </div>
         )}
         

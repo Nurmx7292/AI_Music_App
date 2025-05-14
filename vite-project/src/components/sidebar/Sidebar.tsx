@@ -73,7 +73,7 @@ export default function Sidebar() {
         <img src={image} className="profile-img" alt="profile" />
         <div className="sidebar-buttons">
           <SidebarButton title="Feed" to="/feed" icon={<MdSpaceDashboard />} />
-          <SidebarButton title="Trending" to="/trending" icon={<FaGripfire />} />
+          <SidebarButton title="Explore" to="/explore" icon={<FaGripfire />} />
           <SidebarButton title="Player" to="/player" icon={<FaPlay />} />
           <SidebarButton title="Favorites" to="/favorites" icon={<MdFavorite />} />
           <SidebarButton title="Library" to="/" icon={<IoLibrary />} />

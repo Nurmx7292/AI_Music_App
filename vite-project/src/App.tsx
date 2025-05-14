@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Favorite } from './pages/Favorite/Favorite';
-import { Trending } from './pages/Trending/Trending';
+import { Explore } from './pages/Explore/Explore';
 import { Player } from './pages/Player/Player';
 import { Feed } from './pages/Feed/Feed';
 import { Library } from './pages/Library/Library';
@@ -56,7 +56,7 @@ function App() {
         <Route path='/favorite' element={<Favorite />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/player' element={<Player />} />
-        <Route path='/trending' element={<Trending />} />
+        <Route path='/explore' element={<Explore />} />
       </Routes>
     </div>
   );
