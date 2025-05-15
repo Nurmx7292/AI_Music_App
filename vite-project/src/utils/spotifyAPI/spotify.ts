@@ -15,7 +15,8 @@ const scopes = [
   "user-follow-read",
   "streaming",
   "user-read-email",
-  "user-read-private"
+  "user-read-private",
+  "user-top-read"
 ];
 
 export const generatePKCE = async () => {
