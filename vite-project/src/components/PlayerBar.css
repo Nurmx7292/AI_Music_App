@@ -1,0 +1,128 @@
+.player-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 140px;
+  background: #181818;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.4);
+  padding: 0 8px;
+}
+
+.player-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.player-bar__cover {
+  width: 56px;
+  height: 56px;
+  background: #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.player-bar__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.player-bar__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-bar__artist {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-bar__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 4px;
+}
+
+.player-bar__button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  margin: 0 8px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.player-bar__button:hover {
+  color: #1db954;
+}
+
+.player-bar__progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 320px;
+}
+.player-bar__progress input[type="range"] {
+  flex: 1 1 auto;
+  accent-color: #1db954;
+  height: 4px;
+}
+
+.player-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 120px;
+}
+.player-bar__right input[type="range"] {
+  width: 100px;
+  accent-color: #1db954;
+}
+
+@media (max-width: 700px) {
+  .player-bar {
+    flex-direction: column;
+    height: auto;
+    padding: 8px;
+    gap: 8px;
+  }
+  .player-bar__progress {
+    width: 180px;
+  }
+  .player-bar__cover {
+    width: 40px;
+    height: 40px;
+  }
+  .player-bar__right input[type="range"] {
+    width: 60px;
+  }
+} 
+
+.player-bar__buttons {
+  flex-grow: no;
+  display: flex;
+  align-items: center;
+}
+.player-body_center {
+  position: absolute;
+  left: 50%;
+}

@@ -44,7 +44,7 @@ export default function WidgetCard({ title, similar, featured, newRelease }: Wid
               className="widget-image"
             />
             <p className="widget-name">{item.name}</p>
-          </div>
+        </div>
         ))}
       </div>
       <div className="widget-fade"></div>

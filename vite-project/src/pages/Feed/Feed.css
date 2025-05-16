@@ -209,7 +209,7 @@
 
   .tracks-grid,
   .playlists-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 
   .track-card {

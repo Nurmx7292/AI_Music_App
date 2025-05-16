@@ -7,6 +7,7 @@ import Queue from "../../components/queue/index";
 import AudioPLayer from "../../components/audioPlayer";
 import Widgets from "../../components/widgets/index";
 import { log } from "console";
+import { usePlayer } from "../../context/PlayerContext";
 
 export const Player = () => {
   const location = useLocation();

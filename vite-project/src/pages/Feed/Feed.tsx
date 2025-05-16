@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiClient from '../../utils/spotifyAPI/spotify';
 import './Feed.css';
+import { usePlayer } from '../../context/PlayerContext';
 
 interface Track {
   id: string;
@@ -24,6 +25,7 @@ export const Feed = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { setPlayer } = usePlayer();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,20 +98,10 @@ export const Feed = () => {
     fetchData();
   }, []);
 
-  const handlePlay = async (uri: string) => {
-    try {
-      const token = localStorage.getItem('access_token');
-      await apiClient.put('me/player/play', 
-        { uris: [uri] },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
-    } catch (error) {
-      console.error('Error playing track:', error);
+  const handlePlay = (trackUri: string) => {
+    const index = trendingTracks.findIndex(t => t.uri === trackUri);
+    if (index !== -1) {
+      setPlayer(trendingTracks as any, index, 'feed');
     }
   };
 

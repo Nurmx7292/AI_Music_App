@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
-import spotifyApi, { setClientToken, playTrack, pauseTrack, resumeTrack } from '../../utils/spotifyAPI/spotify';
+import spotifyApi, { setClientToken } from '../../utils/spotifyAPI/spotify';
 import './Explore.css';
+import { usePlayer } from '../../context/PlayerContext';
 
 interface Track {
   id: string;
@@ -22,6 +23,7 @@ export const Explore = () => {
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
+  const { setPlayer } = usePlayer();
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -92,23 +94,10 @@ export const Explore = () => {
     setSearchTimeout(timeoutId);
   };
 
-  const handlePlay = async (track: Track) => {
-    try {
-      if (currentlyPlaying === track.id) {
-        if (isPlaying) {
-          await pauseTrack();
-        } else {
-          await resumeTrack();
-        }
-        setIsPlaying(!isPlaying);
-      } else {
-        await playTrack(track.uri);
-        setCurrentlyPlaying(track.id);
-        setIsPlaying(true);
-      }
-    } catch (error) {
-      console.error('Error playing track:', error);
-      setError('Failed to play track. Please try again.');
+  const handlePlay = (track: Track) => {
+    const index = tracks.findIndex(t => t.id === track.id);
+    if (index !== -1) {
+      setPlayer(tracks as any, index, 'explore');
     }
   };
 

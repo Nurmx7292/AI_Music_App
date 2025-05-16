@@ -19,7 +19,7 @@ export default function AudioPLayer({
     const token = localStorage.getItem("access_token");
     if (token) {
       initializePlayer(token);
-    }
+      }
   }, []);
 
   useEffect(() => {
@@ -87,8 +87,8 @@ export default function AudioPLayer({
 
   const currentPercentage = duration ? (trackProgress / duration) * 100 : 0;
 
-  const artists = [];
-  currentTrack?.album?.artists.forEach((artist) => {
+  const artists: string[] = [];
+  currentTrack?.album?.artists.forEach((artist: { name: string }) => {
     artists.push(artist.name);
   });
 
