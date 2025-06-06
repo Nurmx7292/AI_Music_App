@@ -1,20 +1,22 @@
 {
-  "name": "backend",
+  "name": "music-recommender-backend",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "Backend for music recommendation system",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node src/server.js",
+    "import": "node src/scripts/importSongs.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "axios": "^1.6.7",
     "cors": "^2.8.5",
+    "csv-parse": "^5.5.3",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "spotify-preview-finder": "^1.1.1"
+    "express-validator": "^7.0.1",
+    "pg-promise": "^11.5.4"
   }
 }
