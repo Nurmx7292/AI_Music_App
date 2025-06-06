@@ -1,0 +1,198 @@
+.recommendationsSection {
+  flex: 1;
+  min-width: 300px;
+  padding: 25px;
+  background: var(--surface-alt);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0 0 25px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0 0 18px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.dropZone {
+  flex: 1;
+  min-height: 200px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 25px;
+  margin-bottom: 25px;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: var(--surface);
+}
+
+.dropZone.isOver {
+  border-color: var(--accent-color);
+  background-color: rgba(29, 233, 182, 0.08);
+}
+
+.dropText {
+  text-align: center;
+  color: var(--text-secondary);
+  margin: auto;
+  font-size: 1.1rem;
+}
+
+.selectedSongs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.removeButton {
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--error);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  margin-left: auto;
+}
+
+.removeButton:hover {
+  background: rgba(255, 82, 82, 0.1);
+  color: #FF7A7A;
+}
+
+.recommendButton {
+  padding: 14px 20px;
+  background: var(--button-primary);
+  color: var(--surface);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.recommendButton:hover:not(:disabled) {
+  background: var(--button-primary-hover);
+  box-shadow: 0 4px 10px rgba(29, 233, 182, 0.3);
+}
+
+.recommendButton:disabled {
+  background: var(--button-secondary);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Scrollbar styles using CSS variables */
+.selectedSongs::-webkit-scrollbar {
+  width: 8px;
+}
+
+.selectedSongs::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 4px;
+}
+
+.selectedSongs::-webkit-scrollbar-thumb {
+  background: var(--surface-bright);
+  border-radius: 4px;
+}
+
+.selectedSongs::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+.error {
+  color: var(--error);
+  background-color: rgba(255, 82, 82, 0.1);
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.recommendations {
+  margin-top: 25px;
+}
+
+.songCard {
+  display: 'flex';
+  align-items: 'center';
+  gap: '20px';
+  padding: '18px 24px';
+  border-radius: '12px';
+  background: var(--surface);
+  margin-bottom: '18px';
+  box-shadow: '0 2px 8px rgba(0,0,0,0.07)';
+  min-height: 80px;
+  transition: 'box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out';
+}
+
+.songCardImage {
+  border-radius: '8px';
+  object-fit: 'cover';
+  flex-shrink: 0;
+}
+
+.songCardContent {
+  display: 'flex';
+  flex-direction: 'column';
+  justify-content: 'center';
+}
+
+.songCardName {
+  font-weight: 600;
+  font-size: '1.25rem';
+  margin-bottom: 4px;
+  color: var(--text-main);
+}
+
+.songCardArtist {
+  font-size: '1.05rem';
+  color: var(--text-secondary);
+}
+
+.songCardSimilarity {
+  margin-left: 'auto';
+  font-size: '0.9rem';
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.songCardClickable:hover {
+  cursor: pointer;
+  background: var(--surface-bright);
+  box-shadow: '0 4px 12px rgba(0,0,0,0.1)';
+}
+
+/* Ensure remove button is correctly styled when inside a song card */
+.songCard .removeButton {
+  background: transparent; /* Overriding to keep it consistent */
+  border: 1px solid var(--error); 
+  color: var(--error);
+}
+
+.songCard .removeButton:hover {
+  background: rgba(255, 82, 82, 0.1);
+  color: #FF7A7A;
+} 
