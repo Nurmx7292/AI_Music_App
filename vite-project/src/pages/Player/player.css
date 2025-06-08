@@ -1,15 +1,131 @@
-.left-player-body {
+/* Removing old layout */
+/* .left-player-body ... */
+/* .right-player-body ... */
+
+.player-page-wrapper { /* New wrapper for centering */
   display: flex;
-  gap: 15%;
-  flex-direction: row-reverse;
-  width: 70%;
-  height: 90%;
+  justify-content: center;
+  width: 100%;
+  padding: 0 20px; /* Add horizontal padding to the wrapper if needed */
+  box-sizing: border-box;
 }
 
-.right-player-body {
-  width: 30%;
-  height: 100%;
+.player-page-container { 
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  max-width: 1600px; /* Max width for the 3-column layout */
+  height: calc(100vh - var(--player-bar-height) - 40px); /* Adjusted height considering player bar and some top/bottom padding */
+  padding: 20px 0; /* Vertical padding, horizontal handled by wrapper or container's own padding */
+  gap: 25px; /* Increased gap slightly */
+  box-sizing: border-box;
+}
+
+.player-sidebar-left {
+  flex: 0 0 25%; 
+  max-width: 320px; /* Adjusted max-width slightly */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 20px; /* Adjusted gap */
+  overflow-y: auto; 
+  height: 100%; 
+  padding-right: 5px; /* Space for scrollbar if it appears */
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) var(--surface-alt);
+}
+
+.player-sidebar-left::-webkit-scrollbar {
+  width: 8px;
+}
+.player-sidebar-left::-webkit-scrollbar-track {
+  background: var(--surface-alt);
+  border-radius: 4px;
+}
+.player-sidebar-left::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+.player-sidebar-left::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color-hover);
+}
+
+
+.player-main-content {
+  flex: 1 1 auto; /* Ensure it takes up available space, can adjust basis if needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: flex-start; /* Changed to flex-start to see content from top */
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 10px; /* Padding for content within main area */
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) var(--surface-alt);
+}
+
+.player-main-content::-webkit-scrollbar {
+  width: 8px;
+}
+.player-main-content::-webkit-scrollbar-track {
+  background: var(--surface-alt);
+  border-radius: 4px;
+}
+.player-main-content::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+.player-main-content::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color-hover);
+}
+
+
+.player-sidebar-right {
+  flex: 0 0 25%; /* Re-added flex basis for consistency */
+  max-width: 380px; /* Adjusted max-width slightly */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Adjusted gap */
+  overflow-y: hidden; /* Parent will hide overflow, child .queue-list will scroll */
+  height: 100%;
+}
+
+/* Responsive adjustments for player layout */
+@media (max-width: 1200px) { /* Adjusted breakpoint for earlier stacking */
+  .player-page-container {
+    gap: 15px;
+  }
+  .player-sidebar-left { max-width: 280px; }
+  .player-sidebar-right { max-width: 320px; }
+}
+
+@media (max-width: 1024px) { /* Tablet breakpoint */
+  .player-page-container {
+    flex-direction: column;
+    height: auto; /* Allow content to flow */
+  }
+  .player-sidebar-left,
+  .player-main-content,
+  .player-sidebar-right {
+    flex-basis: auto; /* Reset basis */
+    width: 100%;
+    max-width: none;
+    height: auto; /* Allow content to define height */
+    overflow-y: visible; /* Avoid nested scrollbars unless necessary */
+  }
+  .player-sidebar-left {
+    order: 2; /* Example: move new releases below main player on mobile */
+  }
+  .player-main-content {
+    order: 1;
+  }
+  .player-sidebar-right {
+    order: 3;
+  }
+}
+
+@media (max-width: 768px) { /* Mobile breakpoint */
+  .player-page-container {
+    padding: 10px;
+    gap: 10px;
+  }
 }

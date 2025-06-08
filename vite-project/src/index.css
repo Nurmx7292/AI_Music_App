@@ -1,19 +1,22 @@
 :root {
-  --main-bg: linear-gradient(135deg, #23243a 0%, #3a3a6a 100%);
-  --surface: #23243a;
-  --surface-alt: #2e2f4a;
-  --surface-bright: #3a3a6a;
-  --text-main: #ffffff;
-  --text-secondary: #b0b3c6;
-  --primary: #5b7fff;
-  --primary-hover: #3e5ed7;
-  --border: #3a3a6a;
-  --button-primary: #5b7fff;
-  --button-primary-hover: #3e5ed7;
-  --button-secondary: #2e2f4a;
-  --button-secondary-hover: #3a3a6a;
-  --error: #ff3b30;
-  --success: #34c759;
+  --main-bg: linear-gradient(145deg, #2A2C47 0%, #3A3A6A 70%, #4B4B8B 100%);
+  --surface: #25273F;
+  --surface-alt: #2E304F;
+  --surface-bright: #3C3E6E;
+  --text-main: #F0F0F5;
+  --text-secondary: #A0A3B8;
+  --accent-color: #E91E63;
+  --accent-color-hover: #C2185B;
+  --primary: var(--accent-color);
+  --primary-hover: var(--accent-color-hover);
+  --border: #3C3E6E;
+  --button-primary: var(--accent-color);
+  --button-primary-hover: var(--accent-color-hover);
+  --button-secondary: #383A59;
+  --button-secondary-hover: #4A4D7C;
+  --error: #FF5252;
+  --success: #4CAF50;
+  --player-bar-height: 90px;
 }
 
 html, body {
@@ -24,6 +27,7 @@ html, body {
 body, :root {
   background: var(--main-bg);
   color: var(--text-main);
+  font-family: 'Inter', sans-serif;
 }
 
 a {

@@ -15,6 +15,7 @@
   /* border-radius: 30px; */
   display: flex;
   flex-direction: column;
+  padding-bottom: var(--player-bar-height); /* Added padding for player bar */
 }
 
 .burger-menu {
